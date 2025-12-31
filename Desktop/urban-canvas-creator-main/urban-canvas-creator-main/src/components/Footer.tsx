@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   Dialog,
   DialogContent,
@@ -12,6 +13,16 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
   const [isTermsOpen, setIsTermsOpen] = useState(false);
+  const [isLegalOpen, setIsLegalOpen] = useState(false);
+
+  const navLinks = [
+    { name: "Home", href: "/" },
+    { name: "Projects", href: "/projects" },
+    { name: "Our Approach", href: "/approach" },
+    { name: "Contact", href: "/contact" },
+    { name: "Careers", href: "/careers" },
+    { name: "FAQ", href: "/faq" },
+  ];
 
   return (
     <>
@@ -21,35 +32,89 @@ const Footer = () => {
           style={{ backgroundImage: 'url(/2.jpg)' }}
         />
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-t border-border pt-8">
-            {/* Logo */}
-            <div className="flex items-center">
-              <img 
-                src="/logo.png" 
-                alt="STRUCSTA SCOPE" 
-                className="h-8 lg:h-10 w-auto object-contain"
-              />
+          <div className="border-t border-border pt-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+              {/* Logo */}
+              <div className="space-y-4">
+                <img 
+                  src="/logo.png" 
+                  alt="STRUCSTA SCOPE" 
+                  className="h-8 lg:h-10 w-auto object-contain"
+                />
+              </div>
+
+              {/* Navigation Menu */}
+              <div>
+                <h3 className="text-sm font-semibold text-foreground mb-4">Navigation</h3>
+                <nav className="flex flex-col gap-3">
+                  {navLinks.map((link) => (
+                    <Link
+                      key={link.name}
+                      to={link.href}
+                      className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
+                    >
+                      {link.name}
+                    </Link>
+                  ))}
+                </nav>
+              </div>
+
+              {/* Legal Links */}
+              <div>
+                <h3 className="text-sm font-semibold text-foreground mb-4">Legal</h3>
+                <div className="flex flex-col gap-3">
+                  <button
+                    onClick={() => setIsLegalOpen(true)}
+                    className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 text-left"
+                  >
+                    Legal Information
+                  </button>
+                  <button
+                    onClick={() => setIsPrivacyOpen(true)}
+                    className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 text-left"
+                  >
+                    Privacy Policy
+                  </button>
+                  <button
+                    onClick={() => setIsTermsOpen(true)}
+                    className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 text-left"
+                  >
+                    Terms of Service
+                  </button>
+                </div>
+              </div>
+
+              {/* Contact Info */}
+              <div>
+                <h3 className="text-sm font-semibold text-foreground mb-4">Contact</h3>
+                <div className="space-y-3 text-sm text-muted-foreground">
+                  <p>
+                    <a 
+                      href="mailto:hello@strucstascope.com" 
+                      className="hover:text-foreground transition-colors duration-200"
+                    >
+                      hello@strucstascope.com
+                    </a>
+                  </p>
+                </div>
+                <div className="space-y-2 text-sm text-muted-foreground mt-6">
+                  <p className="font-semibold text-foreground">STRUCSTA SCOPE LIMITED</p>
+                  <p>Company number: 16076869</p>
+                  <p className="leading-relaxed">
+                    Registered office address:<br />
+                    Littleton Business Park<br />
+                    Littleton Drive, Staffordshire<br />
+                    Cannock, WS12 4TR
+                  </p>
+                </div>
+              </div>
             </div>
 
             {/* Copyright */}
-            <p className="text-sm text-muted-foreground">
-              © {currentYear} STRUCSTA SCOPE. All rights reserved.
-            </p>
-
-            {/* Links */}
-            <div className="flex items-center gap-6">
-              <button
-                onClick={() => setIsPrivacyOpen(true)}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
-              >
-                Privacy
-              </button>
-              <button
-                onClick={() => setIsTermsOpen(true)}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
-              >
-                Terms
-              </button>
+            <div className="border-t border-border pt-6">
+              <p className="text-sm text-muted-foreground text-center">
+                © {currentYear} STRUCSTA SCOPE LIMITED. All rights reserved.
+              </p>
             </div>
           </div>
         </div>
@@ -234,6 +299,136 @@ const Footer = () => {
                     hello@strucstascope.com
                   </a>
                 </p>
+              </div>
+            </div>
+          </ScrollArea>
+        </DialogContent>
+      </Dialog>
+
+      {/* Legal Stuff Modal */}
+      <Dialog open={isLegalOpen} onOpenChange={setIsLegalOpen}>
+        <DialogContent className="max-w-3xl max-h-[90vh]">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-display">Legal Information</DialogTitle>
+            <DialogDescription>
+              Company registration and legal details
+            </DialogDescription>
+          </DialogHeader>
+          <ScrollArea className="max-h-[60vh]">
+            <div className="space-y-6 text-sm text-muted-foreground pr-4">
+              <div>
+                <h3 className="text-base font-semibold text-foreground mb-2">Company Details</h3>
+                <div className="space-y-2 leading-relaxed">
+                  <p>
+                    <span className="font-semibold text-foreground">Company Name:</span> STRUCSTA SCOPE LIMITED
+                  </p>
+                  <p>
+                    <span className="font-semibold text-foreground">Company Number:</span> 16076869
+                  </p>
+                  <p>
+                    <span className="font-semibold text-foreground">Registered Office Address:</span><br />
+                    Littleton Business Park<br />
+                    Littleton Drive, Staffordshire<br />
+                    Cannock, WS12 4TR<br />
+                    United Kingdom
+                  </p>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-base font-semibold text-foreground mb-2">Company Registration</h3>
+                <p className="leading-relaxed">
+                  STRUCSTA SCOPE LIMITED is a private company limited by shares, incorporated in England and Wales. 
+                  The company is registered with Companies House under company number 16076869.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-base font-semibold text-foreground mb-2">Regulatory Information</h3>
+                <p className="leading-relaxed">
+                  The company operates in accordance with the Companies Act 2006 and is subject to the jurisdiction 
+                  of the courts of England and Wales. All business activities are conducted in compliance with 
+                  applicable UK laws and regulations.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-base font-semibold text-foreground mb-2">VAT Information</h3>
+                <p className="leading-relaxed">
+                  If applicable, our VAT registration number will be provided upon request or on invoices. 
+                  For VAT-related inquiries, please contact us using the details below.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-base font-semibold text-foreground mb-2">Professional Indemnity</h3>
+                <p className="leading-relaxed">
+                  STRUCSTA SCOPE LIMITED maintains appropriate professional indemnity insurance as required 
+                  for our professional services. Details of our insurance coverage can be provided upon request 
+                  for project-specific inquiries.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-base font-semibold text-foreground mb-2">Data Protection</h3>
+                <p className="leading-relaxed">
+                  STRUCSTA SCOPE LIMITED is committed to protecting personal data in accordance with the UK GDPR 
+                  and the Data Protection Act 2018. For detailed information about how we handle personal data, 
+                  please refer to our Privacy Policy.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-base font-semibold text-foreground mb-2">Complaints Procedure</h3>
+                <p className="leading-relaxed mb-2">
+                  If you have a complaint about our services, please contact us in writing at our registered 
+                  office address or via email. We will acknowledge your complaint within 5 working days and 
+                  aim to resolve it within 20 working days.
+                </p>
+                <p className="leading-relaxed">
+                  If you are not satisfied with our response, you may be able to refer your complaint to a 
+                  relevant professional body or ombudsman service, depending on the nature of your complaint.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-base font-semibold text-foreground mb-2">Contact for Legal Matters</h3>
+                <p className="leading-relaxed">
+                  For any legal inquiries or to request official company documentation, please contact us at{" "}
+                  <a href="mailto:hello@strucstascope.com" className="text-primary hover:underline">
+                    hello@strucstascope.com
+                  </a>
+                  {" "}or write to us at our registered office address.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-base font-semibold text-foreground mb-2">Additional Resources</h3>
+                <p className="leading-relaxed mb-2">
+                  For more information about UK company registration and regulations, you can visit:
+                </p>
+                <ul className="list-disc list-inside space-y-1 ml-4">
+                  <li>
+                    <a 
+                      href="https://www.gov.uk/government/organisations/companies-house" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-primary hover:underline"
+                    >
+                      Companies House
+                    </a> - Official company information and filings
+                  </li>
+                  <li>
+                    <a 
+                      href="https://www.gov.uk/data-protection" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-primary hover:underline"
+                    >
+                      UK Data Protection
+                    </a> - Information about data protection regulations
+                  </li>
+                </ul>
               </div>
             </div>
           </ScrollArea>
