@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const CareersSection = () => {
   return (
-    <section className="pt-6 lg:pt-8 pb-0 bg-muted/50">
+    <section id="careers" className="pt-6 lg:pt-8 pb-0 bg-muted/50">
       <div className="container mx-auto px-4 lg:px-8 max-w-[1250px]">
         <div className="bg-secondary rounded-2xl p-8 lg:p-12 text-secondary-foreground transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl cursor-pointer">
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 lg:gap-8">
