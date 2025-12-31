@@ -20,8 +20,8 @@ const Footer = () => {
     { name: "Projects", href: "/projects" },
     { name: "Our Approach", href: "/approach" },
     { name: "Contact", href: "/contact" },
-    { name: "Careers", href: "/#careers" },
-    { name: "FAQ", href: "/#faq" },
+    { name: "Careers", href: "/careers" },
+    { name: "FAQ", href: "/faq" },
   ];
 
   return (
@@ -47,26 +47,15 @@ const Footer = () => {
               <div>
                 <h3 className="text-sm font-semibold text-foreground mb-4">Navigation</h3>
                 <nav className="flex flex-col gap-3">
-                  {navLinks.map((link) => {
-                    const isHashLink = link.href.startsWith('/#');
-                    return isHashLink ? (
-                      <a
-                        key={link.name}
-                        href={link.href}
-                        className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
-                      >
-                        {link.name}
-                      </a>
-                    ) : (
-                      <Link
-                        key={link.name}
-                        to={link.href}
-                        className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
-                      >
-                        {link.name}
-                      </Link>
-                    );
-                  })}
+                  {navLinks.map((link) => (
+                    <Link
+                      key={link.name}
+                      to={link.href}
+                      className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
+                    >
+                      {link.name}
+                    </Link>
+                  ))}
                 </nav>
               </div>
 
